@@ -3,20 +3,20 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
-    name: java-web-app-docker
+    name: javawebapp
   name: java-controller
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: java-web-app-docker
+        name: javawebapp
     spec:
       containers:
-      - image: boddupallichanderrao/java-web-app-docker
-        name: java-web-app-docker
+      - image: dockerhandson/java-web-app
+        name: javawebapp
         ports:
-        - name: java-web-app-docker
+        - name: javawebapp
           containerPort: 8080  
 ---
 # Node Port Service
@@ -24,12 +24,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: java-web-app-docker
-  name: java-web-app-docker
+    name: javawebapp
+  name: javawebapp
 spec:
   type: NodePort
   ports:
     - port: 8080
       targetPort: 8080
   selector:
-    name: java-web-app-docker
+    name: javawebapp
